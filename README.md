@@ -12,22 +12,29 @@ O objetivo desse repositório e facilitar a construção de uma infraestrutura n
 
 ## Portas necessárias para o cluster
 
-### Master
-* kube-apiserver -> 6443 TCP
-* etcd server API -> 2379-2380 TPC
-* Kubelet API -> 10250 TCP
-* kube-scheduler -> 10251 TCP
-* kube-controller-manager -> 10252 TCP
-* Kubelet API Read-only -> 10255 TCP
+### Master Node
+| Service                 | Port      | Protocol |
+|-------------------------|-----------|----------|
+| kube-apiserver          | 6443      | TCP      |
+| etcd server API         | 2379-2380 | TCP      |
+| Kubelet API             | 10250     | TCP      |
+| kube-scheduler          | 10251     | TCP      |
+| kube-controller-manager | 10252     | TCP      |
+| Kubelet API Read-only   | 10255     | TCP      |
 
 ## Workers
-* Kubelet API -> 10250 TCP
-* Kubelet API Read-only -> 10255 TCP
-* NodePort Services -> 30000-32767 TCP
+| Service               | Port        | Protocol |
+|-----------------------|-------------|----------|
+| Kubelet API           | 10250       | TCP      |
+| Kubelet API Read-only | 10255       | TCP      |
+| NodePort Services     | 30000-32767 | TCP      |
 
 No caso, vamos utilizar o Weave como pod network, sendo assim também vamos liberar as seguintes portas:
 
-* Weave -> 6783 TCP e 6783-6784 UDP
+| Service | Port      | Protocol |
+|---------|-----------|----------|
+| Weave   | 6783      | TCP      |
+| Weave   | 6783-6784 | UDP      |
 
 ## Recursos criados
 * 1 VPC
@@ -42,10 +49,15 @@ No caso, vamos utilizar o Weave como pod network, sendo assim também vamos libe
 * Instalação do docker e k8s
 
 ## Como iniciar
-Após clonar o repositório, deve-se executar:
+Após clonar o repositório, deve-se executar o comando abaixo para criação do par de chaves para AWS, com ela é possivel se conectar via SSH nas máquinas posteriormente.
+
+```
+ssh-keygen -f k8s-course-key
+```
+
+Obs. Caso queira utilizar uma já existente, basta modificar o nome no arquivo `variables.tf` e referenciar no arquivo `main.tf` para conexão durante o provisionamento.
 
 ``` bash
-ssh-keygen -f k8s-course-key
 terraform init
 terraform plan -out terraform.out
 terraform apply terraform.out
