@@ -4,6 +4,8 @@ Criação de uma infraestrutura na AWS, via Terraform, para realização do curs
 
 O objetivo desse repositório e facilitar a construção de uma infraestrutura na AWS para realização de treinamentos com kubernetes, onde é necessário a criação de alguns componentes, inclusive destroir eles diversas vezes para evitar cobranças.
 
+![Topologia](./docs/k8s-course-arch.png)
+
 ## Necessidades para maioria dos treinamentos
 * 3 instancias EC2 (1-master e 2-workers)
 * Ubuntu
