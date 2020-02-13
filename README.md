@@ -22,7 +22,7 @@ O objetivo desse repositório e facilitar a construção de uma infraestrutura n
 | kube-controller-manager | 10252     | TCP      |
 | Kubelet API Read-only   | 10255     | TCP      |
 
-## Workers
+### Workers
 | Service               | Port        | Protocol |
 |-----------------------|-------------|----------|
 | Kubelet API           | 10250       | TCP      |
@@ -56,6 +56,8 @@ ssh-keygen -f k8s-course-key
 ```
 
 Obs. Caso queira utilizar uma já existente, basta modificar o nome no arquivo `variables.tf` e referenciar no arquivo `main.tf` para conexão durante o provisionamento.
+
+Com isso, podemos criar nossa infraestrutura.
 
 ``` bash
 terraform init
