@@ -1,18 +1,18 @@
-# K8S-COURSE-INFRA
+# terraform-aws-kubernetes
 
 Criação de uma infraestrutura na AWS, via Terraform, para realização do curso Descomplicado Kubernetes da LinuxTips.
 
-## Necessidades
+O objetivo desse repositório e facilitar a construção de uma infraestrutura na AWS para realização de treinamentos com kubernetes, onde é necessário a criação de alguns componentes, inclusive destroir eles diversas vezes para evitar cobranças.
 
-* 3 instancias EC2 
+## Necessidades para maioria dos treinamentos
+* 3 instancias EC2 (1-master e 2-workers)
 * Ubuntu
 * 2 core CPU
 * 2GB de memória RAM
 
-## Portas
+## Portas necessárias para o cluster
 
 ### Master
-
 * kube-apiserver -> 6443 TCP
 * etcd server API -> 2379-2380 TPC
 * Kubelet API -> 10250 TCP
@@ -21,7 +21,6 @@ Criação de uma infraestrutura na AWS, via Terraform, para realização do curs
 * Kubelet API Read-only -> 10255 TCP
 
 ## Workers
-
 * Kubelet API -> 10250 TCP
 * Kubelet API Read-only -> 10255 TCP
 * NodePort Services -> 30000-32767 TCP
@@ -30,12 +29,11 @@ No caso, vamos utilizar o Weave como pod network, sendo assim também vamos libe
 
 * Weave -> 6783 TCP e 6783-6784 UDP
 
-## Recursos Criados
-
+## Recursos criados
 * 1 VPC
 * 2 Security Groups (master e workers)
   * Egress 0.0.0.0/0
-  * Ingress 22 [0.0.0.0/0] (deve mudar isso!)
+  * Ingress 22 [0.0.0.0/0] (deve mudar isso para seu IP!)
   * Ingress 80 [0.0.0.0/0]
   * Portas necessárias para o cluster (dentro da VPC)
 * 1 Public subnet
@@ -44,7 +42,6 @@ No caso, vamos utilizar o Weave como pod network, sendo assim também vamos libe
 * Instalação do docker e k8s
 
 ## Como iniciar
-
 Após clonar o repositório, deve-se executar:
 
 ``` bash
@@ -54,8 +51,7 @@ terraform plan -out terraform.out
 terraform apply terraform.out
 ```
 
-## Após execução
-
+## Após execução acessar as máquinas e executar os seguintes comandos
 1. Fazer o pull das imagens
 ```
 kubeadm config images pull
