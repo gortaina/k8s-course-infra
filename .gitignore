@@ -7,3 +7,6 @@
 
 # Keys
 k8s-course-key*
+
+# OS
+.DS_Store

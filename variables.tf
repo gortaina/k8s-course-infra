@@ -19,7 +19,7 @@ variable "instance_worker_count" {
 }
 
 variable "instance_type" {
-  default = "t2.medium"
+  default = "t3.small"
 }
 
 variable "aws_ami" {
