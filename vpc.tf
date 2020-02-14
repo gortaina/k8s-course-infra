@@ -1,10 +1,14 @@
 # VPC
 resource "aws_vpc" "vpc-k8s-course" {
-  cidr_block = "10.0.0.0/16"
+  cidr_block = "172.100.0.0/16"
   enable_dns_support = "true"
   enable_dns_hostnames = "true"
   enable_classiclink = "false"
   instance_tenancy = "default"
+
+  tags = {
+    Name = "vpc-k8s-course"
+  }
 }
 
 # Security Groups
@@ -88,6 +92,17 @@ resource "aws_security_group" "master-sg-k8s-course" {
     protocol = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
+
+  ingress {
+    from_port = 443
+    to_port = 443
+    protocol = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  tags = {
+    Name = "master-sg-k8s-course"
+  }
 }
 
 resource "aws_security_group" "worker-sg-k8s-course" {
@@ -148,5 +163,16 @@ resource "aws_security_group" "worker-sg-k8s-course" {
     to_port = 80
     protocol = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  ingress {
+    from_port = 443
+    to_port = 443
+    protocol = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  tags = {
+    Name = "worker-sg-k8s-course"
   }
 }

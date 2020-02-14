@@ -35,6 +35,10 @@ resource "aws_instance" "k8s-master" {
     private_key = "${file(var.private_key_path)}"
     host = "${aws_instance.k8s-master[count.index].public_ip}"
   }
+
+  tags = {
+    Name = "k8s-master"
+  }
 }
 
 # Workers
@@ -69,6 +73,10 @@ resource "aws_instance" "k8s-workers" {
     user = "ubuntu"
     private_key = "${file(var.private_key_path)}"
     host = "${self.public_ip}"
+  }
+
+  tags = {
+    Name = "k8s-worker"
   }
 }
 
