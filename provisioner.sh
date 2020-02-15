@@ -19,8 +19,8 @@ apt-get update
 apt-get install -y kubelet kubeadm kubectl
 
 # Confs
-docker info | grep -i cgroup
-sed -i "s/cgroup-driver=systemd/cgroup-driver=cgroupfs/g" /etc/systemd/kubelet/service.d/10-kubeadm.conf
-systemctl daemon-reload
-systemctl restart kubelet
-kubeadm config images pull
+# docker info | grep -i cgroup
+# sed -i "s/cgroup-driver=systemd/cgroup-driver=cgroupfs/g" /etc/systemd/kubelet/service.d/10-kubeadm.conf
+# systemctl daemon-reload
+# systemctl restart kubelet
+# kubeadm config images pull
